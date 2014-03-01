@@ -1,0 +1,30 @@
+<BoardInfo>
+
+<!-- epcs -->
+<DTAppend name="status" type="string" parentlabel="epcs" val="disabled"/>
+
+<!-- spi for sd card -->
+<DTAppend name="#address-cells" type="number" parentlabel="spi_0" val="1"/>
+<DTAppend name="#size-cells" type="number" parentlabel="spi_0" val="0"/>
+
+<!-- sd card slave on spi bus -->
+<DTAppend name="mmc-slot@0" type="node" parentlabel="spi_0" newlabel="sd_card_slot"/>
+<DTAppend name="compatible" type="string" parentlabel="sd_card_slot" val="mmc-spi-slot"/>
+<DTAppend name="reg" parentlabel="sd_card_slot" >
+    <val type="hex">0</val>
+</DTAppend>
+
+<DTAppend name="voltage-ranges" parentlabel="sd_card_slot" >
+    <val type="number">3300</val>
+    <val type="number">3300</val>
+</DTAppend>
+
+<DTAppend name="spi-max-frequency" parentlabel="sd_card_slot" >
+    <val type="number">20000000</val>
+</DTAppend>
+
+<Chosen>
+        <Bootargs val="debug console=ttyAL0,115200 root=/dev/mmcblk0p2 rootwait"></Bootargs>
+</Chosen>
+
+</BoardInfo>
